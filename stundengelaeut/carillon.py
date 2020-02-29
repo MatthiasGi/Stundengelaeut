@@ -1,4 +1,7 @@
-midi = 0
+class Carillon:
 
-def setMidi(m):
-    midi = m
+    midi = None
+
+    def __init__(self):
+        # HIER: Initialisierung von MIDI
+        pass
