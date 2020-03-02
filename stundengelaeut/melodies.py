@@ -8,7 +8,7 @@ from stundengelaeut import notes
 
 # Voreingestellte Dauer einer Achtel-Note
 def achtel():
-    return 250
+    return 0.25
 
 def regina_caeli(achtel = achtel()):
     viertel = 2 * achtel

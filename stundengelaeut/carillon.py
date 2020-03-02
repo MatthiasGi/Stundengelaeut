@@ -1,3 +1,5 @@
+import time
+
 class Carillon:
 
     midiout = None
@@ -14,3 +16,12 @@ class Carillon:
     def noteOff(self, note, velocity = 0):
         msg = [0x80 + self.channelAdder, note, velocity]
         self.midiout.send_message(msg)
+
+    def hitBell(self, note):
+        self.noteOn(note)
+        self.noteOff(note)
+
+    def playMelody(self, melody):
+        for m in melody:
+            self.hitBell(m[1])
+            time.sleep(m[0])
