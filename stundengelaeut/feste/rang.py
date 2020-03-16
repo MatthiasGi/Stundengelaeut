@@ -7,8 +7,10 @@ class Rang(Enum):
     eine Unterscheidung dazwischen.
     """
     HOCHFEST = 10
+    SONDERTAG = 19
     SONNTAG = 20
     FEST = 30
     GEBOTENER_GEDENKTAG = 40
-    NICHTGEBOTENER_GEDENKTAG = 50
-    GEPRAEGTE_ZEIT = 60
+    OKTAVTAG = 50
+    NICHTGEBOTENER_GEDENKTAG = 60
+    GEPRAEGTE_ZEIT = 70

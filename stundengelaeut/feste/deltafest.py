@@ -1,4 +1,4 @@
-from .fest import Fest
+from fest import Fest
 from datetime import timedelta
 
 class DeltaFest(Fest):

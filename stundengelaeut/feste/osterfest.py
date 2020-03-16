@@ -1,8 +1,8 @@
-from .deltafest import DeltaFest
+from deltafest import DeltaFest
 from datetime import date
 from datetime import timedelta
 
-class OsterFest(Fest):
+class OsterFest(DeltaFest):
     """
     Feste, die in Abhängigkeit von Ostern stehen, werden mit dieser Klasse
     bezeichnet. Dabei wird die Anzahl an Tagen angegeben, die das Fest sich von

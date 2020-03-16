@@ -1,4 +1,4 @@
-from .fest import Fest
+from fest import Fest
 
 class TagFest(Fest):
     """
@@ -29,7 +29,7 @@ class TagFest(Fest):
             raise SystemExit("Ungültiger Tag übergeben! (1)")
         if monat in [4, 6, 9, 11] and tag > 30:
             raise SystemExit("Ungültiger Tag übergeben! (2)")
-        else if monat == 2 and tag > 29:
+        if monat == 2 and tag > 29:
             raise SystemExit("Ungültiger Tag übergeben! (3)")
         self.monat = monat
         self.tag = tag

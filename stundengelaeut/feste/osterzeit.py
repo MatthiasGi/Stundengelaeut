@@ -1,4 +1,4 @@
-from .osterfest import OsterFest
+from osterfest import OsterFest
 from datetime import timedelta
 
 class Osterzeit(OsterFest):

@@ -1,5 +1,5 @@
-from .osterfest import OsterFest
-from .rang import Rang
+from osterfest import OsterFest
+from rang import Rang
 from datetime import timedelta
 
 class Fastenzeit(OsterFest):
