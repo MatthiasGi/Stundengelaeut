@@ -1,3 +1,8 @@
+"""MIDI-Notenwerte
+
+Namespace, der die Notennamen zusammenfasst, die das Carillon wiedergeben kann.
+"""
+
 A1SHARP = 0x22
 B1      = 0x23
 C2      = 0x24
