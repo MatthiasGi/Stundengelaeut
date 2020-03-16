@@ -6,14 +6,53 @@ werden hier im kompatiblen Format für schnelle Aufrufe vorgehalten.
 
 from stundengelaeut.notes import *
 
-# Voreingestellte Dauer einer Achtel-Note
-def achtel():
+def _achtel():
+    """
+    Gibt die voreingestellte Dauer einer Achtelnote zurück. So ist eine
+    persistente Änderung ausgeschlossen.
+
+    Returns
+    -------
+    Standardwert für die Dauer einer Achtelnote.
+    """
     return 0.25
 
-def regina_caeli(achtel = achtel()):
+def _note_values(achtel):
+    """
+    Generiert übrige Notenwerte aus der Dauer einer Achtelnote.
+
+    Parameters
+    ----------
+    achtel : int
+        Dauer einer Achtelnote
+
+    Returns
+    -------
+    Drei Zahlen, in folgender Reihenfolge die Dauer einer ganzen, halben und
+    viertel Note.
+    """
     viertel = 2 * achtel
     halbe = 2 * viertel
     ganze = 2 * halbe
+    return ganze, halbe, viertel
+
+"""
+Gibt die Melodie des Regina caeli in einem carillon-freundlichen Format zurück.
+
+Parameters
+----------
+achtel : int (optional)
+    Dauer einer Achtelnote
+
+Returns
+-------
+Regina caeli, laetare, alleulia.
+Quia quem meruisti portare, alleluia,
+Ressurexit, sicut dixit, alleluia.
+Ora pro nobis Deum, alleluia.
+"""
+def regina_caeli(achtel = _achtel()):
+    ganze, halbe, viertel = _note_values(achtel)
 
     return [
         [viertel, F3], # Regina caeli, laetare
@@ -67,10 +106,28 @@ def regina_caeli(achtel = achtel()):
         [ganze, F3]
     ]
 
-def ave_regina_caelorum(achtel = achtel()):
-    viertel = 2 * achtel
-    halbe = 2 * viertel
-    ganze = 2 * halbe
+"""
+Gibt die Melodie des Ave Regina Caelorum in einem carillon-freundlichen Format
+zurück.
+
+Parameters
+----------
+achtel : int (optional)
+    Dauer einer Achtelnote
+
+Returns
+-------
+Ave Regina caelorum,
+ave Domina Angelorum:
+Salve radix, salve porta,
+ex qua mundo lux est orta:
+Gaude Virgo gloriosa,
+super omnes speciosa:
+Vale o valde decora,
+et pro nobis Christum exora.
+"""
+def ave_regina_caelorum(achtel = _achtel()):
+    ganze, halbe, viertel = _note_values(achtel)
 
     return [
         [viertel, F3], # Ave Regina caelorum
@@ -145,10 +202,33 @@ def ave_regina_caelorum(achtel = achtel()):
         [ganze, F3]
     ]
 
-def alma_redemptoris(achtel = achtel()):
-    viertel = 2 * achtel
-    halbe = 2 * viertel
-    ganze = 2 * halbe
+"""
+Gibt die Melodie des Alma Redemptoris Mater in einem carillon-freundlichen
+Format zurück.
+
+Parameters
+----------
+achtel : int (optional)
+    Dauer einer Achtelnote
+
+Returns
+-------
+Alma Redemptoris Mater,
+quae pervia caeli
+porta manes
+et stella maris,
+succurre cadenti,
+surgere qui curat, populo:
+tu quae genuisti,
+natura mirante,
+tuum sanctum Genitorem,
+Virgo prius ac posterius,
+Gabrielis ab ore
+sumens illud Ave,
+peccatorum miserere.
+"""
+def alma_redemptoris(achtel = _achtel()):
+    ganze, halbe, viertel = _note_values(achtel)
 
     return [
         [achtel, C3], # Alma redemptoris mater
@@ -249,10 +329,31 @@ def alma_redemptoris(achtel = achtel()):
         [ganze, C3]
     ]
 
-def salve_regina(achtel = achtel()):
-    viertel = 2 * achtel
-    halbe = 2 * viertel
-    ganze = 2 * halbe
+"""
+Gibt die Melodie des Salve Regina in einem carillon-freundlichen Format zurück.
+
+Parameters
+----------
+achtel : int (optional)
+    Dauer einer Achtelnote
+
+Returns
+-------
+Salve, Regina,
+mater misericordiae;
+Vita, dulcedo et spes nostra, salve.
+Ad te clamamus, exsules filii Evae.
+Ad te suspiramus,
+gementes et flentes in hac lacrimarum valle.
+Eia ergo, Advocata nostra,
+illos tuos misericordes oculos
+ad nos converte.
+Et Jesum, benedictum fructum ventris tui,
+nobis post hoc exsilium ostende.
+O clemens, o pia, o dulcis virgo Maria.
+"""
+def salve_regina(achtel = _achtel()):
+    ganze, halbe, viertel = _note_values(achtel)
 
     return [
         [viertel, C3], # Salve regina
@@ -396,10 +497,23 @@ def salve_regina(achtel = achtel()):
         [ganze, C3]
     ]
 
-def lourdes_lied(achtel = achtel()):
-    viertel = 2 * achtel
-    halbe = 2 * viertel
-    ganze = 2 * halbe
+"""
+Gibt die Melodie des Lourdes-Lieds in einem carillon-freundlichen Format zurück.
+
+Parameters
+----------
+achtel : int (optional)
+    Dauer einer Achtelnote
+
+Returns
+-------
+Die Glocken verkünden mit fröhlichem Laut
+Das Ave Maria so lieblich und laut.
+Ave, Ave, Ave Maria,
+Ave, Ave, Ave Maria.
+"""
+def lourdes_lied(achtel = _achtel()):
+    ganze, halbe, viertel = _note_values(achtel)
 
     return [
         [viertel, E3], # Die Glocken verkünden
