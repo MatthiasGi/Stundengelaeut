@@ -124,8 +124,8 @@ class FestManager:
         -------
         Die heute zu spielende marianische Antiphon aus stundengelaeut.melodies.
         """
-        for zeit in zeiten:
-            if zeit[0].isDate(): return zeit[1]
+        for zeit in FestManager.zeiten:
+            if zeit[0].isDate(date): return zeit[1]
         return salve_regina()
 
     @staticmethod

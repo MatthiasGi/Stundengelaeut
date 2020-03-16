@@ -38,7 +38,7 @@ class TagFest(Fest):
 
     def isDate(self, d):
         """@inheritDoc"""
-        return d.month == self.month and d.day == self.day
+        return self.monat == d.month and self.tag == d.day
 
     def rang(self):
         """@inheritDoc"""

@@ -2,7 +2,7 @@ from stundengelaeut.notes import *
 from stundengelaeut.today import Today
 
 from datetime import datetime
-from datetime import time
+from datetime import timedelta
 
 class Schlagwerk:
     """
@@ -54,7 +54,7 @@ class Schlagwerk:
         hours : int
             Anzahl an Stunden, die es zu schlagen gilt.
         """
-        for i in range(hours): self.carillon.playMelody([[3, self.trinitatis]])
+        for i in range(hours): self.carillon.playMelody([[2.5, self.trinitatis]])
 
     def tellTime(self, t = datetime.now(), complete = False):
         """
@@ -74,10 +74,10 @@ class Schlagwerk:
         """
         quarters, hours = Schlagwerk.roundQuarter(t)
         self.tellQuarters(quarters)
-        if quraters == 4 or complete: self.tellHours(hours)
+        if quarters == 4 or complete: self.tellHours(hours)
 
     @staticmethod
-    def roundQuarter(t):
+    def roundQuarter(t = datetime.now()):
         """
         Methode, die die aktuelle Zeit auf die nächste Viertelstunde rundet und
         die Anzahl an Stunden und Viertelstunden für einen Stundenschlag daraus
@@ -85,8 +85,9 @@ class Schlagwerk:
 
         Parameters
         ----------
-        t : datetime.datetime
-            Objekt, das für die Rundung genutzt werden soll.
+        t : datetime.datetime (optional)
+            Objekt, das für die Rundung genutzt werden soll. Bei Nichtangabe
+            wird der aktuelle Zeitpunkt gewählt.
 
         Returns
         -------
@@ -98,7 +99,7 @@ class Schlagwerk:
         dt = t + timedelta(minutes = 7, seconds = 30)
         dt -= timedelta(minutes = dt.minute % 15)
 
-        quarters = dt.minute / 15
+        quarters = int(dt.minute / 15)
         if quarters == 0: quarters = 4
         hours = dt.hour % 12
         if hours == 0: hours = 12

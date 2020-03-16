@@ -12,6 +12,6 @@ class HeiligeFamilieFest(DeltaFest):
 
     def referenceDate(self, year):
         """@inheritDoc"""
-        weihnachten = date(d.year, 12, 25)
-        if weihnachten.isoweekday() == 7: return date(d.year, 12, 30)
+        weihnachten = date(year, 12, 25)
+        if weihnachten.isoweekday() == 7: return date(year, 12, 30)
         return weihnachten + timedelta(days = 7 - weihnachten.isoweekday())
