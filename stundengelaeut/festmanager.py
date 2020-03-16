@@ -1,15 +1,27 @@
-from adventsfest import AdventsFest
-from adventszeit import Adventszeit
-from fastenzeit import Fastenzeit
-from heiligefamiliefest import HeiligeFamilieFest
-from osterfest import OsterFest
-from osterzeit import Osterzeit
-from rang import Rang
-from tagfest import TagFest
-from taufedesherrnfest import TaufeDesHerrnFest
-from weihnachtszeit import Weihnachtszeit
+from stundengelaeut.feste.adventsfest import AdventsFest
+from stundengelaeut.feste.adventszeit import Adventszeit
+from stundengelaeut.feste.fastenzeit import Fastenzeit
+from stundengelaeut.feste.heiligefamiliefest import HeiligeFamilieFest
+from stundengelaeut.feste.osterfest import OsterFest
+from stundengelaeut.feste.osterzeit import Osterzeit
+from stundengelaeut.feste.rang import Rang
+from stundengelaeut.feste.tagfest import TagFest
+from stundengelaeut.feste.taufedesherrnfest import TaufeDesHerrnFest
+from stundengelaeut.feste.weihnachtszeit import Weihnachtszeit
+
+from stundengelaeut.melodies import (alma_redemptoris, ave_regina_caelorum,
+                                     regina_caeli, salve_regina)
+
+from datetime import date
 
 class FestManager:
+    """
+    Statische Klasse, die die Behandlung von Festen zusammenfasst. Hier sind
+    alle berücksichtigten Feste registriert und hier wird auch entschieden,
+    welche marianische Antiphon zu spielen ist.
+    """
+
+    """Sammlung aller registrierten Feste."""
     feste = [
         TagFest(12, 25, "Hochfest der Geburt des Herrn", Rang.HOCHFEST),
         HeiligeFamilieFest(0, "Fest der Heiligen Familie", Rang.FEST),
@@ -88,3 +100,112 @@ class FestManager:
         TagFest(12, 8, "Hochfest der ohne Erbsünde empfangenen Jungfrau und Gottesmutter Maria", Rang.HOCHFEST),
         TagFest(12, 13, "Luzia", Rang.NICHTGEBOTENER_GEDENKTAG)
     ]
+
+    """Sammlung der geprägten Zeiten."""
+    zeiten = [
+        (Adventszeit(), alma_redemptoris()),
+        (Weihnachtszeit(), alma_redemptoris()),
+        (Fastenzeit(), ave_regina_caelorum()),
+        (Osterzeit(), regina_caeli())
+    ]
+
+    @staticmethod
+    def antiphon(date = date.today()):
+        """
+        Ermittelt, welche Antiphon zum gegebenen Datum zu spielen ist.
+
+        Parameters
+        ----------
+        date : datetime.date (optional)
+            Datum, für das die marianische Antiphon erfragt werden soll. Ohne
+            Angabe wird das heutige Datum verwendet.
+
+        Returns
+        -------
+        Die heute zu spielende marianische Antiphon aus stundengelaeut.melodies.
+        """
+        for zeit in zeiten:
+            if zeit[0].isDate(): return zeit[1]
+        return salve_regina()
+
+    @staticmethod
+    def fest(date = date.today()):
+        """
+        Ermittelt, welches Fest zum gegebenen Datum begangen wird. Dabei wird
+        die Rangfolge berücksichtigt. Bei gleichem Rang überwiegen erstgenannte
+        Feste in der Liste „feste“ oben.
+
+        Parameters
+        ----------
+        date : datetime.date (optional)
+            Datum, für das die Abfrage des Festes erfolgen soll. Ohne Angabe
+            wird das heutige Datum verwendet.
+
+        Returns
+        -------
+        Das zum gegebenen Datum begangene Fest.
+        """
+        fest = None
+        for f in FestManager.feste:
+            if not f.isDate(date): continue
+            if fest == None: fest = f; continue
+            if f.rang > fest.rang: fest = f
+        return fest
+
+    @staticmethod
+    def hasFest(date = date.today()):
+        """
+        Ermittelt, ob zum gegebenen Datum ein Fest begangen wird. Effizienter,
+        als zu überprüfen, ob die Methode „fest(date)“ etwas zurückgibt, da hier
+        beim ersten Fund abgebrochen wird und keine Abwägung der Rangfolge
+        erfolgt.
+
+        Parameters
+        ----------
+        date : datetime.date (optional)
+            Datum, für das die Abfrage eines Festes erfolgen soll. Ohne Angabe
+            wird das heutige Datum verwendet.
+
+        Returns
+        -------
+        Ob am gegebenem Datum ein Fest begangen wird.
+        """
+        for f in FestManager.feste:
+            if f.isDate(date): return True
+        return False
+
+    @staticmethod
+    def zeit(date = date.today()):
+        """
+        Ermittelt, welche geprägte Zeit am gegebenen Datum begangen wird.
+
+        Parameters
+        ----------
+        date : datetime.date (optional)
+            Datum, für das die Abfrage der geprägten Zeit erfolgen soll. Ohne
+            Angabe wird das heutige Datum verwendet.
+
+        Returns
+        -------
+        Die am gegebenem Datum begangene geprägte Zeit (oder None, falls keine
+        begangen wird).
+        """
+        for z in FestManager.zeiten:
+            if z.isDate(date): return z
+
+    @staticmethod
+    def hasZeit(date = date.today()):
+        """
+        Ermittelt, ob am gegebenem Datum eine geprägte Zeit begangen wird.
+
+        Parameters
+        ----------
+        date : datetime.date (optional)
+            Datum, für das die Abfrage einer geprägten Zeit erfolgen soll. Ohne
+            Angabe wird das heutige Datum verwendet.
+
+        Returns
+        -------
+        Ob eine geprägte Zeit zum gegebenem Datum begangen wird.
+        """
+        return FestManager.zeit(date) != None

@@ -1,5 +1,5 @@
-from adventsfest import AdventsFest
-from rang import Rang
+from stundengelaeut.feste.adventsfest import AdventsFest
+from stundengelaeut.feste.rang import Rang
 from datetime import date
 
 class Adventszeit(AdventsFest):

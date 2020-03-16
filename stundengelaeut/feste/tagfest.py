@@ -1,4 +1,4 @@
-from fest import Fest
+from stundengelaeut.feste.fest import Fest
 
 class TagFest(Fest):
     """

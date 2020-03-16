@@ -1,4 +1,4 @@
-from taufedesherrnfest import TaufeDesHerrnFest
+from stundengelaeut.feste.taufedesherrnfest import TaufeDesHerrnFest
 from datetime import date
 
 class Weihnachtszeit(TaufeDesHerrnFest):

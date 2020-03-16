@@ -1,4 +1,4 @@
-from deltafest import DeltaFest
+from stundengelaeut.feste.deltafest import DeltaFest
 from datetime import date
 from datetime import timedelta
 
