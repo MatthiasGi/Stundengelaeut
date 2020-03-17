@@ -104,5 +104,5 @@ class Schlagwerk:
         hours = dt.hour % 12
         if hours == 0: hours = 12
 
-        print(t, "->", dt.time, ";", quarters, ":", hours) # TODO: Debug
+        print(t, "->", dt.time(), ";", quarters, ":", hours) # TODO: Debug
         return quarters, hours
