@@ -56,7 +56,7 @@ class Schlagwerk:
         """
         for i in range(hours): self.carillon.playMelody([[2.5, self.trinitatis]])
 
-    def tellTime(self, t = datetime.now(), complete = False):
+    def tellTime(self, t = None, complete = False):
         """
         Lässt die aktuelle Zeit anschlagen. Dabei erhält jede volle
         Viertelstunde einen Viertelstundenschlag, jede Stunde einen
@@ -72,12 +72,13 @@ class Schlagwerk:
             Ob der Stundenschlag in jedem Falle erfolgen soll. Ansonsten erfolgt
             er standardmäßig nur zur vollen Stunde.
         """
+        if t == None: t = datetime.now()
         quarters, hours = Schlagwerk.roundQuarter(t)
         self.tellQuarters(quarters)
         if quarters == 4 or complete: self.tellHours(hours)
 
     @staticmethod
-    def roundQuarter(t = datetime.now()):
+    def roundQuarter(t = None):
         """
         Methode, die die aktuelle Zeit auf die nächste Viertelstunde rundet und
         die Anzahl an Stunden und Viertelstunden für einen Stundenschlag daraus
@@ -96,6 +97,7 @@ class Schlagwerk:
         hours : int
             Anzahl der Stundenschläge, die nach der Rundung entstehen.
         """
+        if t == None: t = datetime.now()
         dt = t + timedelta(minutes = 7, seconds = 30)
         dt -= timedelta(minutes = dt.minute % 15)
 
@@ -104,6 +106,8 @@ class Schlagwerk:
         hours = dt.hour % 12
         if hours == 0: hours = 12
 
+        # TODO: Debug
         print("Ausgabe um", datetime.now())
-        print(t, "->", dt.time(), ";", quarters, ":", hours) # TODO: Debug
+        print(t, "->", dt.time(), ";", quarters, ":", hours)
+        
         return quarters, hours
