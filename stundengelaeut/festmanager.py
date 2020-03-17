@@ -110,7 +110,7 @@ class FestManager:
     ]
 
     @staticmethod
-    def antiphon(date = None):
+    def antiphon(d = None):
         """
         Ermittelt, welche Antiphon zum gegebenen Datum zu spielen ist.
 
@@ -124,13 +124,13 @@ class FestManager:
         -------
         Die heute zu spielende marianische Antiphon aus stundengelaeut.melodies.
         """
-        if date == None: date.today()
+        if d == None: d = date.today()
         for zeit in FestManager.zeiten:
-            if zeit[0].isDate(date): return zeit[1]
+            if zeit[0].isDate(d): return zeit[1]
         return salve_regina()
 
     @staticmethod
-    def fest(date = None):
+    def fest(d = None):
         """
         Ermittelt, welches Fest zum gegebenen Datum begangen wird. Dabei wird
         die Rangfolge berücksichtigt. Bei gleichem Rang überwiegen erstgenannte
@@ -146,16 +146,16 @@ class FestManager:
         -------
         Das zum gegebenen Datum begangene Fest.
         """
-        if date == None: date = date.today()
+        if d == None: d = date.today()
         fest = None
         for f in FestManager.feste:
-            if not f.isDate(date): continue
+            if not f.isDate(d): continue
             if fest == None: fest = f; continue
             if f.rang > fest.rang: fest = f
         return fest
 
     @staticmethod
-    def hasFest(date = None):
+    def hasFest(d = None):
         """
         Ermittelt, ob zum gegebenen Datum ein Fest begangen wird. Effizienter,
         als zu überprüfen, ob die Methode „fest(date)“ etwas zurückgibt, da hier
@@ -172,13 +172,13 @@ class FestManager:
         -------
         Ob am gegebenem Datum ein Fest begangen wird.
         """
-        if date == None: date = date.today()
+        if d == None: d = date.today()
         for f in FestManager.feste:
-            if f.isDate(date): return True
+            if f.isDate(d): return True
         return False
 
     @staticmethod
-    def zeit(date = None):
+    def zeit(d = None):
         """
         Ermittelt, welche geprägte Zeit am gegebenen Datum begangen wird.
 
@@ -193,12 +193,12 @@ class FestManager:
         Die am gegebenem Datum begangene geprägte Zeit (oder None, falls keine
         begangen wird).
         """
-        if date == None: date = date.today()
+        if d == None: d = date.today()
         for z in FestManager.zeiten:
-            if z.isDate(date): return z
+            if z.isDate(d): return z
 
     @staticmethod
-    def hasZeit(date = None):
+    def hasZeit(d = None):
         """
         Ermittelt, ob am gegebenem Datum eine geprägte Zeit begangen wird.
 
@@ -212,4 +212,4 @@ class FestManager:
         -------
         Ob eine geprägte Zeit zum gegebenem Datum begangen wird.
         """
-        return FestManager.zeit(date) != None
+        return FestManager.zeit(d) != None
