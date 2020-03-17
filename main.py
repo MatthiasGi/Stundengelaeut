@@ -3,7 +3,7 @@ import rtmidi
 import time
 
 midiout = rtmidi.MidiOut()
-midiout.open_port(0)
+midiout.open_port(len(midiout.get_ports()) - 1)
 s = Stundengelaeut(midiout)
 
 while True:
