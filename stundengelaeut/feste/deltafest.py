@@ -18,17 +18,17 @@ class DeltaFest(Fest):
         Rang des Festes
     """
     def __init__(self, days, name, rang):
-        self.delta = timedelta(days = days)
-        self.name = name
-        self.rang = rang
+        self._delta = timedelta(days = days)
+        self._name = name
+        self._rang = rang
 
     def rang(self):
         """@inheritDoc"""
-        return self.rang
+        return self._rang
 
     def name(self):
         """@inheritDoc"""
-        return self.name
+        return self._name
 
     def referenceDate(self, year):
         """
@@ -56,4 +56,4 @@ class DeltaFest(Fest):
 
     def isDate(self, d):
         """@inheritDoc"""
-        return self.referenceDate(d.year) + self.delta == d
+        return self.referenceDate(d.year) + self._delta == d

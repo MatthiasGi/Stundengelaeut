@@ -31,19 +31,19 @@ class TagFest(Fest):
             raise SystemExit("Ungültiger Tag übergeben! (2)")
         if monat == 2 and tag > 29:
             raise SystemExit("Ungültiger Tag übergeben! (3)")
-        self.monat = monat
-        self.tag = tag
-        self.name = name
-        self.rang = rang
+        self._monat = monat
+        self._tag = tag
+        self._name = name
+        self._rang = rang
 
     def isDate(self, d):
         """@inheritDoc"""
-        return self.monat == d.month and self.tag == d.day
+        return self._monat == d.month and self._tag == d.day
 
     def rang(self):
         """@inheritDoc"""
-        return self.rang
+        return self._rang
 
     def name(self):
         """@inheritDoc"""
-        return self.name
+        return self._name
