@@ -66,7 +66,7 @@ class Stundengelaeut:
         Wird am morgen ausgeführt und aktiviert das Geläut wieder (stummer Modus
         wird deaktiviert).
         """
-        self.stumm = False
+        self.stumm = Today.mute()
 
     def update(self):
         """

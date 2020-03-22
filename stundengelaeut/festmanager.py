@@ -112,6 +112,12 @@ class FestManager:
         (Osterzeit(), regina_caeli())
     ]
 
+    """Sammlung von Tagen, an denen Ruhe sein soll."""
+    muteFeste = [
+        OsterFest(-2, "Karfreitag", Rang.SONDERTAG),
+        OsterFest(-1, "Karsamstag", Rang.SONDERTAG)
+    ]
+
     @staticmethod
     def antiphon(d = None):
         """
@@ -119,7 +125,7 @@ class FestManager:
 
         Parameters
         ----------
-        date : datetime.date (optional)
+        d : datetime.date (optional)
             Datum, für das die marianische Antiphon erfragt werden soll. Ohne
             Angabe wird das heutige Datum verwendet.
 
@@ -141,7 +147,7 @@ class FestManager:
 
         Parameters
         ----------
-        date : datetime.date (optional)
+        d : datetime.date (optional)
             Datum, für das die Abfrage des Festes erfolgen soll. Ohne Angabe
             wird das heutige Datum verwendet.
 
@@ -167,7 +173,7 @@ class FestManager:
 
         Parameters
         ----------
-        date : datetime.date (optional)
+        d : datetime.date (optional)
             Datum, für das die Abfrage eines Festes erfolgen soll. Ohne Angabe
             wird das heutige Datum verwendet.
 
@@ -181,13 +187,34 @@ class FestManager:
         return False
 
     @staticmethod
+    def mute(d = None):
+        """
+        Ermittelt, ob zum gegebenen Datum das Stundengeläut schweigen soll. Dies
+        bietet sich insbesondere für das Triduum Paschale an.
+
+        Parameters
+        ----------
+        d : datetime.date (optional)
+            Datum, für das die Abfrage erfolgen soll. Ohne Angabe wird das
+            heutige Datum verwendet.
+
+        Returns
+        -------
+        Ob am gegebenem Datum das Stundengeläut schweigen soll.
+        """
+        if d == None: d = date.today()
+        for f in FestManager.muteFeste:
+            if f.isDate(d): return True
+        return False
+
+    @staticmethod
     def zeit(d = None):
         """
         Ermittelt, welche geprägte Zeit am gegebenen Datum begangen wird.
 
         Parameters
         ----------
-        date : datetime.date (optional)
+        d : datetime.date (optional)
             Datum, für das die Abfrage der geprägten Zeit erfolgen soll. Ohne
             Angabe wird das heutige Datum verwendet.
 
@@ -207,7 +234,7 @@ class FestManager:
 
         Parameters
         ----------
-        date : datetime.date (optional)
+        d : datetime.date (optional)
             Datum, für das die Abfrage einer geprägten Zeit erfolgen soll. Ohne
             Angabe wird das heutige Datum verwendet.
 

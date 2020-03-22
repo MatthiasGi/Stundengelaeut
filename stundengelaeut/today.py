@@ -22,6 +22,9 @@ class Today:
     """Fest, das am heutigen Tage begangen wird."""
     _feast = None
 
+    """Ob das Stundengeläut heute schweigen soll."""
+    _mute = False
+
     @staticmethod
     def check():
         """
@@ -32,6 +35,7 @@ class Today:
         Today._lastupdate = date.today()
         Today._antiphon = FestManager.antiphon()
         Today._feast = FestManager.fest()
+        Today._mute = FestManager.mute()
 
     @staticmethod
     def antiphon():
@@ -70,3 +74,8 @@ class Today:
         Today.check()
         if Today._feast == None: return False
         return Today._feast.rang() >= Rang.NICHTGEBOTENER_GEDENKTAG
+
+    @staticmethod
+    def mute():
+        Today.check()
+        return Today._mute
