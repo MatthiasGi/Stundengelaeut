@@ -1,4 +1,5 @@
 from stundengelaeut.feste.taufedesherrnfest import TaufeDesHerrnFest
+from stundengelaeut.feste.rang import Rang
 from datetime import date
 
 class Weihnachtszeit(TaufeDesHerrnFest):

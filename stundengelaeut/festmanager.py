@@ -5,6 +5,7 @@ from stundengelaeut.feste.heiligefamiliefest import HeiligeFamilieFest
 from stundengelaeut.feste.osterfest import OsterFest
 from stundengelaeut.feste.osterzeit import Osterzeit
 from stundengelaeut.feste.rang import Rang
+from stundengelaeut.feste.sonntage import Sonntage
 from stundengelaeut.feste.tagfest import TagFest
 from stundengelaeut.feste.taufedesherrnfest import TaufeDesHerrnFest
 from stundengelaeut.feste.weihnachtszeit import Weihnachtszeit
@@ -23,6 +24,8 @@ class FestManager:
 
     """Sammlung aller registrierten Feste."""
     feste = [
+        Sonntage(),
+
         TagFest(12, 25, "Hochfest der Geburt des Herrn", Rang.HOCHFEST),
         HeiligeFamilieFest(0, "Fest der Heiligen Familie", Rang.FEST),
         TagFest(12, 26, "Stephanus", Rang.FEST),

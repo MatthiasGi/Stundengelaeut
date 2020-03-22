@@ -1,4 +1,5 @@
 from stundengelaeut.feste.osterfest import OsterFest
+from stundengelaeut.feste.rang import Rang
 from datetime import timedelta
 
 class Osterzeit(OsterFest):
