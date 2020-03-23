@@ -2,6 +2,8 @@ from stundengelaeut.carillon import Carillon
 from stundengelaeut.schlagwerk import Schlagwerk
 from stundengelaeut.melodies import lourdes_lied
 from stundengelaeut.today import Today
+
+from datetime import (datetime, time)
 import schedule
 
 class Stundengelaeut:
@@ -18,11 +20,12 @@ class Stundengelaeut:
         wird Kanal 1 genutzt.
     stumm : bool (optional)
         Ob das Stundengeläut im stummen Modus starten soll. Standardmäßig tut es
-        das nicht.
+        das abhängig von der Zeit.
     """
     def __init__(self, midiout, channel = 1, stumm = False):
         self.carillon = Carillon(midiout, channel)
         self.stumm = stumm
+        if not stumm: self._check_stumm()
         self.schlagwerk = Schlagwerk(self.carillon)
 
         schedule.every().day.at("08:00").do(self.morgen)
@@ -34,6 +37,16 @@ class Stundengelaeut:
         schedule.every().hour.at(":00").do(self.schlaege)
 
         schedule.every().day.at("12:00").do(self.mittag)
+
+    def _check_stumm(self):
+        """
+        Interne Funktion, die prüft, ob das Geläut zur aktuellen Zeit stumm
+        bleiben soll. Dabei wird die Uhrzeit und der Tag (Kartag?) mit bedacht.
+        """
+        if Today.mute(): self.stumm = True; return
+        if datetime.now().time() < time(8, 0): self.stumm = True; return
+        if datetime.now().time() > time(21, 0): self.stumm = True; return
+        self.stumm = False
 
     def schlaege(self):
         """
@@ -64,9 +77,9 @@ class Stundengelaeut:
     def morgen(self):
         """
         Wird am morgen ausgeführt und aktiviert das Geläut wieder (stummer Modus
-        wird deaktiviert).
+        wird deaktiviert), sofern anderes nicht dagegen spricht.
         """
-        self.stumm = Today.mute()
+        self._check_stumm()
 
     def update(self):
         """
