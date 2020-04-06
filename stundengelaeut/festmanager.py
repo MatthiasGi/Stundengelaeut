@@ -160,7 +160,7 @@ class FestManager:
         for f in FestManager.feste:
             if not f.isDate(d): continue
             if fest == None: fest = f; continue
-            if f.rang > fest.rang: fest = f
+            if f.rang() > fest.rang(): fest = f
         return fest
 
     @staticmethod
