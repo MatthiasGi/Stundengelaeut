@@ -87,3 +87,24 @@ class Stundengelaeut:
         Vorgänge vorzunehmen.
         """
         schedule.run_pending()
+
+    def mute(self):
+        """
+        Setzt das Stundengeläut über einen zusätzlichen, externen Trigger aus.
+        """
+        self.stumm = True
+
+    def unmute(self, automatic = True):
+        """
+        Schaltet das Stundengeläut anhand eines zusätzlichen, externen Trigger
+        sofort wieder ein.
+
+        Parameters
+        ----------
+        automatic : bool
+            Ob für die Wiedereinschaltung die Rahmenbedingungen überprüft
+            werden sollen. Ist dieser Wert True wird das Geläut z.B. dennoch
+            Nachts oder während des Triduum Paschalis nicht angeschaltet.
+        """
+        self.stumm = False
+        if automatic: self._check_stumm()
