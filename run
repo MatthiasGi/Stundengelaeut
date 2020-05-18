@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Kleines Skript, dass Stundengeläut und REST-API auf einem Linux-Gerät starten
+# kann
+
+cd "$(dirname "$0")"
+
+GrandOrgue &
+sleep 10
+
+python3 main.py &
+
+export FLASK_APP=rest.py
+flask run --host=0.0.0.0
