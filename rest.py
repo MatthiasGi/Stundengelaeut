@@ -11,7 +11,7 @@ tpa = adafruit_tpa2016.TPA2016(i2c)
 
 @app.route('/state')
 def get_state():
-    return '{ state: %d }' % (1 if tpa.amplifier_shutdown else 0)
+    return '{ state: %d }' % (0 if tpa.amplifier_shutdown else 1)
 
 @app.route('/state/<int:state>')
 def set_state(state):
