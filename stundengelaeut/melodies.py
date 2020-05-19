@@ -36,6 +36,102 @@ def _note_values(achtel):
     ganze = 2 * halbe
     return ganze, halbe, viertel
 
+
+"""
+Gibt die Melodie des „Macht hoch die Tür“ in einem carillon-freundlichen Format
+zurück.
+
+Parameters
+----------
+achtel : int (optional)
+    Dauer einer Achtelnote
+
+Returns
+-------
+Macht hoch die Tür, die Tor macht weit,
+es komnmt der Herr der Herrlichkeit,
+ein König aller Königreich,
+ein Heiland aller Welt zugleich,
+der Heil und Leben mit sich bringt,
+derhalben jauchzt, mit Freuden singt.
+Gelobet sei mein Gott,
+mein Schöpfer reich an Rat.
+"""
+def macht_hoch_die_tuer(achtel = _achtel()):
+    ganze, halbe, viertel = _note_values(achtel)
+
+    return [
+        [viertel, G3], # Macht hoch die Tür die Tor macht weit
+        [halbe, A3SHARP],
+        [viertel, G3SHARP],
+        [halbe, G3],
+        [viertel, F3],
+        [viertel, D3SHARP],
+        [viertel, F3],
+        [viertel, G3],
+        [halbe, F3],
+        [viertel, A3SHARP], # es kommt der Herr der Herrlichkeit
+        [halbe, G3SHARP],
+        [viertel, G3SHARP],
+        [halbe, G3],
+        [viertel, G3],
+        [viertel, F3],
+        [viertel, D3SHARP],
+        [viertel, F3],
+        [halbe, D3SHARP],
+        [viertel, G3], # ein König aller Königreich
+        [halbe, F3],
+        [viertel, F3],
+        [viertel, G3],
+        [viertel, A3],
+        [viertel, A3SHARP],
+        [viertel, A3SHARP],
+        [viertel, C4],
+        [viertel, A3],
+        [halbe, A3SHARP],
+        [viertel, F3], # ein Heiland aller Welt zugleich
+        [halbe, G3],
+        [viertel, F3],
+        [viertel, G3],
+        [viertel, A3],
+        [viertel, A3SHARP],
+        [viertel, A3SHARP],
+        [viertel, C4],
+        [viertel, A3],
+        [halbe, A3SHARP],
+        [viertel, A3SHARP], # der Heil und Leben mit sich bringt
+        [halbe, C4],
+        [viertel, A3SHARP],
+        [halbe, C4],
+        [viertel, A3SHARP],
+        [viertel, C4],
+        [viertel, A3SHARP],
+        [viertel, G3SHARP],
+        [halbe, G3],
+        [viertel, A3SHARP], # derhalben jauchzt mit Freuden singt
+        [halbe, C4],
+        [viertel, A3SHARP],
+        [halbe, C4],
+        [viertel, A3SHARP],
+        [viertel, C4],
+        [viertel, A3SHARP],
+        [viertel, G3SHARP],
+        [halbe, G3],
+        [viertel, A3SHARP], # gelobet sei mein Gott
+        [halbe, D3SHARP],
+        [viertel, D3SHARP],
+        [halbe, G3SHARP],
+        [viertel, G3],
+        [2.5 * halbe, F3],
+        [viertel, A3SHARP], # mein Schöpfer reich an Rat
+        [halbe, G3SHARP],
+        [viertel, G3],
+        [viertel, F3],
+        [viertel, D3SHARP],
+        [viertel, F3],
+        [2.5 * halbe, D3SHARP]
+    ]
+
 """
 Gibt die Melodie des Regina caeli in einem carillon-freundlichen Format zurück.
 
