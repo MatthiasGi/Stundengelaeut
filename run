@@ -8,7 +8,4 @@ cd "$(dirname "$0")"
 GrandOrgue &
 sleep 10
 
-python3 main.py &
-
-export FLASK_APP=rest.py
-flask run --host=0.0.0.0
+python3 main.py
