@@ -28,7 +28,7 @@ def play_doorbell(button):
             if button.value: return
 
 
-doorbell = digitalio.DigitalInOut(board.D22)
+doorbell = digitalio.DigitalInOut(board.D17)
 doorbell.direction = digitalio.Direction.INPUT
 
 while True:
