@@ -13,9 +13,8 @@ class Osterzeit(OsterFest):
     def isDate(self, d):
         """@inheritDoc"""
         ostern = self.referenceDate(d.year)
-        pfingsten = ostern + timedelta(days = 50)
-        return d >= ostern and d < pfingsten
-        # d < pfingsten, um Pfingstmontag auszusparen.
+        pfingsten = ostern + timedelta(days = 49)
+        return d >= ostern and d <= pfingsten
 
     def rang(self):
         """@inheritDoc"""
