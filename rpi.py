@@ -22,10 +22,10 @@ def play_doorbell(button):
     melody = macht_hoch_die_tuer()
     parts = [melody[idx[i]:idx[i+1]] for i in range(len(idx) - 1)]
 
-    while not button.value:
+    while button.value:
         for p in parts:
             s.carillon.playMelody(p)
-            if button.value: return
+            if not button.value: return
 
 
 doorbell = digitalio.DigitalInOut(board.D17)
