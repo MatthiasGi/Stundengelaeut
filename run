@@ -8,4 +8,5 @@ cd "$(dirname "$0")"
 GrandOrgue &
 sleep 10
 
-python3 rpi.py
+python3 rpi.py &
+python3 restapi.py
