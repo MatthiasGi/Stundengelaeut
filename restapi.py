@@ -31,8 +31,10 @@ app = Flask("Stundengeläut")
 @app.route('/volume/')
 def getVolume():
     if tpa.amplifier_shutdown: return jsonify(dict(volume=0))
-    return jsonify(dict(volume=tpa.fixed_gain))
-    # TODO: Hier skalieren auf 0-100 nötig
+    gain = tpa.fixed_gain
+    if gain > 30: gain -= 64
+    volume = int(99 / 58 * (gain + 28) + 1)
+    return jsonify(dict(volume=volume)
 
 @app.route('/volume/<int:volume>')
 def setVolume(volume):
