@@ -11,7 +11,7 @@ Lautstärke u.Ä. betreibt.
 
 from adafruit_extended_bus import ExtendedI2C as I2C
 import adafruit_tpa2016
-from flask import Flask, abort
+from flask import Flask, abort, jsonify
 
 # TPA-Objekt erstellen
 i2c = I2C(0)
@@ -31,7 +31,7 @@ app = Flask("Stundengeläut")
 @app.route('/volume/')
 def getVolume():
     if tpa.amplifier_shutdown: return dict(volume=0)
-    return dict(volume=tpa.fixed_gain)
+    return jsonify(dict(volume=tpa.fixed_gain))
     # TODO: Hier skalieren auf 0-100 nötig
 
 @app.route('/volume/<int:volume>')
@@ -46,4 +46,4 @@ def setVolume(volume):
 
 # REST-Server starten
 if __name__ == '__main__':
-    app.run(port=80)
+    app.run(host='0.0.0.0', port=8080)
