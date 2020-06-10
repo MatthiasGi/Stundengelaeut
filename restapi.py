@@ -28,13 +28,15 @@ tpa.release_time = 1
 # REST-Server erstellen
 app = Flask("Stundengeläut")
 
+
 @app.route('/volume/')
 def getVolume():
     if tpa.amplifier_shutdown: return jsonify(dict(volume=0))
     gain = tpa.fixed_gain
     if gain > 30: gain -= 64
     volume = int(99 / 58 * (gain + 28) + 1)
-    return jsonify(dict(volume=volume)
+    return jsonify(dict(volume=volume))
+
 
 @app.route('/volume/<int:volume>')
 def setVolume(volume):
@@ -45,6 +47,7 @@ def setVolume(volume):
         tpa.amplifier_shutdown = False
         tpa.fixed_gain = int((58 / 99 * (volume - 1)) - 28)
     return getVolume()
+
 
 # REST-Server starten
 if __name__ == '__main__':
