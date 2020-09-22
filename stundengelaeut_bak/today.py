@@ -6,7 +6,7 @@ from stundengelaeut.feste.rang import Rang
 
 class Today:
     """
-    Statische Methode, die Informationen zum heutigen Tage zusammenträgt und
+    Statische Klasse, die Informationen zum heutigen Tage zusammenträgt und
     gegebenenfalls aktualisiert.
     """
 

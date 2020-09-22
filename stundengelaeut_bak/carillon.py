@@ -82,3 +82,16 @@ class Carillon:
         for m in melody:
             self.hitBell(m[1])
             time.sleep(m[0])
+
+    def volume(self, volume):
+        """
+        Setzt die Lautstärke des Geläuts, indem ein Lautstärkepedal simuliert
+        wird.
+
+        Parameters
+        ----------
+        volume : int
+            Gewünschte Lautstärke 0-127.
+        """
+        msg = [0xB0 + self.channelAdder, 1, volume]
+        self.midiout.send_message(msg)
